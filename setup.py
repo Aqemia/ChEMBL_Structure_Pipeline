@@ -10,4 +10,7 @@ setup(name='chembl_structure_pipeline',
       license='MIT',
       packages=['chembl_structure_pipeline'],
       package_data={'chembl_structure_pipeline': ['data/*']},
+      install_requires=[
+            "rdkit-pypi"
+      ],
       zip_safe=False)

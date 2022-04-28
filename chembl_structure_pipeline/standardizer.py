@@ -264,19 +264,23 @@ def cleanup_drawing_mol(m):
 
 def flatten_tartrate_mol(m):
     tartrate = Chem.MolFromSmarts('OC(=O)C(O)C(O)C(=O)O')
-    # make sure we only match free tartrate/tartaric acid fragments
-    params = Chem.AdjustQueryParameters.NoAdjustments()
-    params.adjustDegree = True
-    params.adjustDegreeFlags = Chem.AdjustQueryWhichFlags.ADJUST_IGNORENONE
-    tartrate = Chem.AdjustQueryProperties(tartrate, params)
+    # master branch of original repository
+    # # make sure we only match free tartrate/tartaric acid fragments
+    # params = Chem.AdjustQueryParameters.NoAdjustments()
+    # params.adjustDegree = True
+    # params.adjustDegreeFlags = Chem.AdjustQueryWhichFlags.ADJUST_IGNORENONE
+    # tartrate = Chem.AdjustQueryProperties(tartrate, params)
     matches = m.GetSubstructMatches(tartrate)
     if matches:
         m = Chem.Mol(m)
-        for match in matches:
-            m.GetAtomWithIdx(match[3]).SetChiralTag(
-                Chem.ChiralType.CHI_UNSPECIFIED)
-            m.GetAtomWithIdx(match[5]).SetChiralTag(
-                Chem.ChiralType.CHI_UNSPECIFIED)
+        m.GetAtomWithIdx(3).SetChiralTag(Chem.ChiralType.CHI_UNSPECIFIED)
+        m.GetAtomWithIdx(5).SetChiralTag(Chem.ChiralType.CHI_UNSPECIFIED)
+        # master branch of original repository
+        # for match in matches:
+        #     m.GetAtomWithIdx(match[3]).SetChiralTag(
+        #         Chem.ChiralType.CHI_UNSPECIFIED)
+        #     m.GetAtomWithIdx(match[5]).SetChiralTag(
+        #         Chem.ChiralType.CHI_UNSPECIFIED)
     return m
 
 
